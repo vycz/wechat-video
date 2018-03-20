@@ -1,0 +1,66 @@
+{% extends "admin/admin.html" %}
+{% import "ui/admin_page.html" as pg %}
+{% block content %}
+    <h1 class="site-h1">视频列表</h1>
+    <table class="layui-table">
+        <colgroup>
+            <col width="100">
+            <col width="200">
+            <col width="200">
+            <col width="100">
+            <col width="100">
+            <col width="100">
+            <col width="100">
+            <col width="200">
+            <col width="100">
+
+        </colgroup>
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>片名</th>
+            <th>封面</th>
+            <th>百度云</th>
+            <th>BT地址</th>
+            <th>标签</th>
+            <th>上映年份</th>
+            <th>添加时间</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for foo in page_data.items %}
+            <tr>
+                <td>{{ foo.id }}</td>
+                <td>{{ foo.title }}</td>
+                <td>{{ foo.logo }}</td>
+                <td>{{ foo.url_baiduyun }}</td>
+                <td>{{ foo.url_bt }}</td>
+                <td>{{ foo.tag.name }}</td>
+                <td>{{ foo.release_time }}</td>
+                <td>{{ foo.addtime }}</td>
+                <td>
+                    <a class="layui-btn layui-btn-xs" lay-event="edit" href="{{ url_for('admin.video_edit',id=foo.id) }}">编辑</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" href="{{ url_for('admin.video_del',id=foo.id) }}">删除</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div>
+        {{ pg.page(page_data,'admin.video_list') }}
+    </div>
+{% endblock %}
+{% block js %}
+    <script>
+        layui.use('form', function () {
+            var $ = layui.$;
+            $(document).ready(function () {
+                $("#g-1").addClass("layui-nav-itemed");
+                $("#g-1-2").addClass("layui-this");
+            });
+
+
+        });
+    </script>
+{% endblock %}

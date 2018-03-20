@@ -1,0 +1,85 @@
+{% extends "admin/admin.html" %}
+{% block content %}
+
+    <h1 class="site-h1">添加视频</h1>
+    {% for msg in get_flashed_messages(category_filter=["ok"]) %}
+        <div style="background-color: #5FB878;">
+            <p>{{ msg }}</p>
+        </div>
+    {% endfor %}
+    <form class="layui-form layui-form-pane" method="post" role="form" enctype="multipart/form-data">
+        <div class="layui-form-item">
+            <label class="layui-form-label">{{ form.title.label }}</label>
+            <div class="layui-input-block">
+                {{ form.title(value=video.title) }}
+                {% for err in form.title.errors %}
+                    <div><span style="color: red">{{ err }}</span></div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">{{ form.baiduyun.label }}</label>
+            <div class="layui-input-block">
+                {{ form.baiduyun(value=video.url_baiduyun) }}
+                {% for err in form.baiduyun.errors %}
+                    <div><span style="color: red">{{ err }}</span></div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">{{ form.bt.label }}</label>
+            <div class="layui-input-block">
+                {{ form.bt(value=video.url_bt) }}
+                {% for err in form.bt.errors %}
+                    <div><span style="color: red">{{ err }}</span></div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">{{ form.release_time.label }}</label>
+            <div class="layui-inline">
+                {{ form.release_time(value=video.release_time) }}
+                {% for err in form.release_time.errors %}
+                    <div><span style="color: red">{{ err }}</span></div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">{{ form.tag.label }}</label>
+            <div class="layui-inline">
+                {{ form.tag(value=video.tag_id) }}
+                {% for err in form.tag.errors %}
+                    <div><span style="color: red">{{ err }}</span></div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">{{ form.logo.label }}</label>
+            {{ form.logo }}
+            {% for err in form.logo.errors %}
+                <div><span style="color: red">{{ err }}</span></div>
+            {% endfor %}
+        </div>
+        <div class="layui-form-item">
+            {{ form.csrf_token }}
+            {{ form.submit }}
+        </div>
+    </form>
+{% endblock %}
+{% block js %}
+    <script>
+        layui.use(['form', 'laydate'], function () {
+            var $ = layui.$;
+            $(document).ready(function () {
+                $("#g-1").addClass("layui-nav-itemed");
+                $("#g-1-3").addClass("layui-this");
+            });
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#input_release_time' //指定元素
+                , type: 'year'
+            });
+
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% macro page(data,url) -%}
+    {% if data %}
+        <div class="layui-box layui-laypage layui-laypage-default">
+            {% if data.pages == 1 %}
+                <a href="{{ url_for(url,page=data.pages) }}" class="layui-laypage-prev layui-disabled">上一页</a>
+            {% else %}
+                <a href="{{ url_for(url,page=data.pages) }}" class="layui-laypage-prev">上一页</a>
+            {% endif %}
+            {% for v in data.iter_pages() %}
+                {% if v == data.page %}
+                    <span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>{{ v }}</em></span>
+                {% else %}
+                    <a href="{{ url_for(url,page=v) }}">{{ v }}</a>
+                {% endif %}
+            {% endfor %}
+            {% if data.has_next %}
+                <a href="{{ url_for(url,page=data.next_num) }}" class="layui-laypage-next">下一页</a>
+            {% else %}
+                <a href="#" class="layui-laypage-next layui-disabled">下一页</a>
+            {% endif %}
+            {% if data.page == data.pages %}
+                <a href="{{ url_for(url,page=data.pages) }}" class="layui-laypage-next layui-disabled">尾页</a>
+            {% else %}
+                <a href="{{ url_for(url,page=data.pages) }}" class="layui-laypage-next">尾页</a>
+            {% endif %}
+        </div>
+    {% endif %}
+{%- endmacro %}

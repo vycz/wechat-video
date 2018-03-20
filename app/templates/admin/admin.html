@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>微信后台</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='layui/css/layui.css') }}">
+    <style>
+        .site-content {
+            padding: 20px 20px 10px 20px;
+        }
+
+        .site-h1 {
+            margin-bottom: 20px;
+            line-height: 60px;
+            padding-bottom: 10px;
+            color: #393D49;
+            border-bottom: 1px solid #eee;
+            font-size: 28px;
+            font-weight: 300;
+        }
+
+    </style>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">微信后台</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="{{ url_for('admin.index') }}">控制台</a></li>
+            <li class="layui-nav-item"><a href="{{ url_for('admin.index') }}">微信接口设置</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">其它系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">邮件管理</a></dd>
+                    <dd><a href="">消息管理</a></dd>
+                    <dd><a href="">授权管理</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    {{ session["admin"] }}
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="{{ url_for('admin.logout') }}">退了</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item" id="g-1">
+                    <a class="" href="javascript:;">视频管理</a>
+                    <dl class="layui-nav-child">
+                        <dd id="g-1-1"><a href="{{ url_for('admin.video_add') }}">添加视频</a></dd>
+                        <dd id="g-1-2"><a href="{{ url_for('admin.video_list',page=1) }}">视频列表</a></dd>
+                        <dd id="g-1-3"><a href="{{ url_for('admin.video_search',page=1) }}">视频搜索</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item" id="g-2">
+                    <a href="javascript:;">用户管理</a>
+                    <dl class="layui-nav-child">
+                        <dd id="g-2-1"><a href="javascript:;">用户列表</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item" id="g-3">
+                    <a class="" href="javascript:;">操作日志</a>
+                    <dl class="layui-nav-child">
+                        <dd id="g-3-1"><a href="javascript:;">操作日志列表</a></dd>
+                        <dd id="g-3-2"><a href="javascript:;">管理员登录日志列表</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item" id="g-4">
+                    <a class="" href="javascript:;">管理员管理</a>
+                    <dl class="layui-nav-child">
+                        <dd id="g-4-1"><a href="javascript:;">添加管理员</a></dd>
+                        <dd id="g-4-2"><a href="javascript:;">管理员列表</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <div class="site-content">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © 微信后台 by Chazyao
+    </div>
+</div>
+<script src="{{ url_for('static',filename='layui/layui.js') }}"></script>
+<script>
+    layui.use('element', function () {
+    });
+</script>
+{% block js %}
+
+{% endblock %}
+</body>
+</html>
