@@ -38,6 +38,7 @@ class Video(db.Model):
     url_bt = db.Column(db.String(100))
     url_baiduyun = db.Column(db.String(100))
     logo = db.Column(db.String(255), unique=True)
+    info = db.Column(db.Text)
     release_time = db.Column(db.String(10))
     addtime = db.Column(db.DateTime, index=True, default=datetime.now())
     tag_id = db.Column(db.Integer, db.ForeignKey('tag.id'))
