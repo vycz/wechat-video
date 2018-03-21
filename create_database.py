@@ -32,7 +32,7 @@ class Admin(db.Model):
 
 # 视频数据
 class Video(db.Model):
-    __tablename__ = "vedio"
+    __tablename__ = "video"
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), unique=True)
     url_bt = db.Column(db.String(100))
@@ -43,7 +43,7 @@ class Video(db.Model):
     tag_id = db.Column(db.Integer, db.ForeignKey('tag.id'))
 
     def __repr__(self):
-        return "<vedio %r>" % self.title
+        return "<video %r>" % self.title
 
 
 # 登录日志
